@@ -1,0 +1,368 @@
+:root {
+    --black-color: #432818; /* Dark Brown for black checkers */
+    --white-color: #FFE6A7; /* Light Beige for white checkers */
+    --bg-color: #FFE6A7; /* Light Beige for background */
+    --primary-color: #BB9457; /* Medium Brown for primary elements */
+    --secondary-color: #99582A; /* Darker Brown for secondary elements */
+    --accent-color: #6F1D1B; /* Dark Red for accents */
+    --highlight-color: #6F1D1B; /* Dark Red for highlight-color */
+    --darker-highlight-color: #4B0F0E; /* Darker shade of accent color */
+}
+* {
+    box-sizing: border-box;
+}
+html {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+html body {
+    transition: background-color 1s;
+    position: relative;
+    background-color: var(--bg-color); /* Updated to new background color */
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column; /* Added to align items vertically */
+}
+html body #board {
+    position: relative;
+    width: 96vmin;
+    height: 96vmin;
+    background-color: var(--primary-color); /* Medium Brown for the board */
+    border: 1vmin var(--accent-color) solid; /* Dark Brown border */
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-between;
+}
+html body #players {
+    position: relative;
+    width: 14vmin;
+    height: 96vmin;
+    background-color: var(--primary-color); /* Medium Brown for players */
+    border: 1vmin var(--black-color) solid; /* Dark Brown border */
+    display: flex;
+    flex-flow: column wrap;
+}
+html body #players .player .color-control {
+    width: 100%;
+    height: 10%;
+    background-color: var(--white-color); /* Light Beige for color control */
+}
+html body #players .player .drop-area {
+    width: 100%;
+    height: 90%;
+    background-color: var(--primary-color); /* Medium Brown for drop area */
+}
+html body #players #black .color-control {
+    background-color: var(--black-color); /* Dark Brown for black checkers */
+}
+html body #players .current .color-control {
+    background-color: var(--accent-color) !important; /* Dark Red for current player */
+}
+html body #debug {
+    position: absolute;
+    top: 1vmin;
+    left: 1vmin;
+}
+#board .qdr {
+    width: 43vmin;
+    height: 47vmin;
+    display: flex;
+    flex-flow: row nowrap;
+    padding: 0 0.5vmin;
+}
+#board .qdr .cl {
+    position: relative;
+    width: 20%;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-flow: column wrap;
+}
+#board .qdr .cl::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 3.5vmin solid transparent;
+    border-right: 3.5vmin solid transparent;
+    border-top: 36vmin solid;
+    background: transparent;
+}
+#board .qdr .cl:nth-child(odd)::after {
+    border-color: var(--white-color); /* Light Beige for odd columns */
+    border-left-color: transparent;
+    border-right-color: transparent;
+}
+#board .qdr .cl:nth-child(even)::after {
+    border-color: var(--secondary-color); /* Darker Brown for even columns */
+    border-left-color: transparent;
+    border-right-color: transparent;
+}
+#board .qdr .cl .white {
+    display: flex;
+    content: "";
+    min-width: 7vmin;
+    min-height: 7vmin;
+    border: 0.5vmin var(--black-color) solid; /* Dark Brown border */
+    border-radius: 3.5vmin;
+    background-color: var(--white-color); /* Light Beige for white checkers */
+    z-index: 999;
+    margin: 0.05vmin auto;
+}
+#board .qdr .cl .white[draggable="true"]:hover {
+    cursor: pointer;
+}
+#board .qdr .cl .black {
+    display: flex;
+    content: "";
+    min-width: 7vmin;
+    min-height: 7vmin;
+    border: 0.4vmin var(--white-color) solid; /* Light Beige border */
+    border-radius: 3.5vmin;
+    background-color: var(--black-color); /* Dark Brown for black checkers */
+    z-index: 999;
+    margin: 0.05vmin auto;
+}
+#board .qdr .cl .black[draggable="true"]:hover {
+    cursor: pointer;
+}
+#board .qdr .cl[moveTarget="true"]::after {
+    border-color: var(--highlight-color); /* Changed to accent color */
+    border-left-color: transparent;
+    border-right-color: transparent;
+}
+#board .qdr .cl[onTarget="true"]::after {
+    border-color: var(--darker-highlight-color);
+    border-left-color: transparent;
+    border-right-color: transparent;
+}
+#board .qdr-1 {
+    top: 0;
+    left: 0;
+}
+#board .qdr-2 {
+    top: 0;
+    right: 0;
+}
+#board .qdr-3 {
+    bottom: 0;
+    right: 0;
+    flex-flow: row-reverse nowrap;
+}
+#board .qdr-3 .cl {
+    justify-content: flex-end;
+}
+#board .qdr-3 .cl::after {
+    top: auto;
+    bottom: 0;
+    border-top: 0;
+    border-bottom: 36vmin solid;
+}
+#board .qdr-4 {
+    bottom: 0;
+    left: 0;
+    flex-flow: row-reverse nowrap;
+}
+#board .qdr-4 .cl {
+    justify-content: flex-end;
+}
+#board .qdr-4 .cl::after {
+    top: auto;
+    bottom: 0;
+    border-top: 0;
+    border-bottom: 36vmin solid;
+}
+#board-bar {
+    display: flex;
+    flex-flow: column wrap;
+    align-content: center;
+    justify-content: space-around;
+    width: 8vmin;
+    height: 96vmin;
+    background-color: var(--black-color); /* Dark Brown for the board bar */
+}
+#board-bar .white {
+    display: flex;
+    content: "";
+    min-width: 7vmin;
+    min-height: 7vmin;
+    border: 0.5vmin var(--black-color) solid; /* Dark Brown border */
+    border-radius: 3.5vmin;
+    background-color: var(--white-color); /* Light Beige for white checkers */
+    z-index: 999;
+    margin: 0.05vmin auto;
+}
+#board-bar .white[draggable="true"]:hover {
+    cursor: pointer;
+}
+#board-bar .black {
+    display: flex;
+    content: "";
+    min-width: 7vmin;
+    min-height: 7vmin;
+    border: 0.5vmin var(--black-color) solid; /* Dark Brown border */
+    border-radius: 3.5vmin;
+    background-color: var(--black-color); /* Dark Brown for black checkers */
+    z-index: 999;
+    margin: 0.05vmin auto;
+}
+#board-bar .black[draggable="true"]:hover {
+    cursor: pointer;
+}
+#board-bar .item {
+    border-color: #ffca28; /* Accent color for items */
+}
+#board #dices {
+    position: absolute;
+    height: 10vmin;
+    width: 20vmin;
+    top: 90vmin;
+    left: 15vmin;
+    z-index: 9999999;
+}
+#board #dices.animate {
+    animation-duration: 3s;
+    animation-name: throw;
+    animation-iteration-count: 1;
+    animation-direction: alternate;
+    animation-fill-mode: both;
+}
+#board #dices .dice {
+    transform-style: preserve-3d;
+    position: relative;
+    width: 6vmin;
+    height: 6vmin;
+    margin-bottom: 6vmin;
+    transition: transform 1s;
+}
+#board #dices .dice-1 {
+    transform: rotateX(-90deg) rotateY(0deg) rotateZ(0deg);
+}
+#board #dices .dice-2 {
+    transform: rotateX(-90deg) rotateY(0deg) rotateZ(-90deg);
+}
+#board #dices .dice-3 {
+    transform: rotateX(180deg) rotateY(0deg) rotateZ(0deg);
+}
+#board #dices .dice-4 {
+    transform: rotateX(0deg) rotateY(0deg) rotateZ(-90deg);
+}
+#board #dices .dice-5 {
+    transform: rotateX(180deg) rotateY(-90deg) rotateZ(0deg);
+}
+#board #dices .dice-6 {
+    transform: rotateX(90deg) rotateY(0deg) rotateZ(0deg);
+}
+#board #dices .dice-side {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 6vmin;
+    height: 6vmin;
+    background-color: var(--black-color); /* Dark Brown for dice side */
+    padding: 0.9vmin;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-content: space-between;
+}
+#board #dices .dice-side:nth-child(2) {
+    left: auto;
+    right: 0;
+}
+#board #dices .dice-side .dot {
+    display: flex;
+    width: 1.2vmin;
+    height: 1.2vmin;
+    border-radius: 1vmin;
+    background-color: var(--black-color); /* Dark Brown for dots */
+}
+#board #dices .dice-side-1 .dot:nth-child(5) {
+    background-color: var(--bg-color); /* Light Beige for the dot */
+}
+#board #dices .dice-side-2 .dot:nth-child(1), #board #dices .dice-side-2 .dot:nth-child(9) {
+    background-color: var(--bg-color); /* Light Beige for the dot */
+}
+#board #dices .dice-side-3 .dot:nth-child(1), #board #dices .dice-side-3 .dot:nth-child(5), #board #dices .dice-side-3 .dot:nth-child(9) {
+    background-color: var(--bg-color); /* Light Beige for the dot */
+}
+#board #dices .dice-side-4 .dot:nth-child(1), #board #dices .dice-side-4 .dot:nth-child(3), #board #dices .dice-side-4 .dot:nth-child(7), #board #dices .dice-side-4 .dot:nth-child(9) {
+    background-color: var(--bg-color); /* Light Beige for the dot */
+}
+#board #dices .dice-side-5 .dot:nth-child(1), #board #dices .dice-side-5 .dot:nth-child(3), #board #dices .dice-side-5 .dot:nth-child(5), #board #dices .dice-side-5 .dot:nth-child(7), #board #dices .dice-side-5 .dot:nth-child(9) {
+    background-color: var(--bg-color); /* Light Beige for the dot */
+}
+#board #dices .dice-side-6 .dot:nth-child(1), #board #dices .dice-side-6 .dot:nth-child(3), #board #dices .dice-side-6 .dot:nth-child(4), #board #dices .dice-side-6 .dot:nth-child(6), #board #dices .dice-side-6 .dot:nth-child(7), #board #dices .dice-side-6 .dot:nth-child(9) {
+    background-color: var(--bg-color); /* Light Beige for the dot */
+}
+#board #dices .dice-side-1 {
+    transform: rotateX(90deg);
+    margin-top: -3vmin;
+}
+#board #dices .dice-side-2 {
+    transform: translateX(3vmin) rotateY(90deg);
+}
+#board #dices .dice-side-3 {
+    transform: translateZ(-3vmin) rotateX(180deg);
+}
+#board #dices .dice-side-4 {
+    transform: translateZ(3vmin);
+}
+#board #dices .dice-side-5 {
+    transform: translateX(-3vmin) rotateY(-90deg);
+}
+#board #dices .dice-side-6 {
+    transform: rotateX(-90deg);
+    margin-top: 3vmin;
+}
+#menu {
+    position: absolute;
+    display: none;
+    width: 150px;
+    height: auto;
+    z-index: 999999;
+}
+#menu .menu-item {
+    width: 100%;
+    position: relative;
+    float: left;
+    height: 40px;
+    line-height: 40px;
+    background-color: var(--white-color); /* Light Beige for menu item */
+    color: #333333; /* Darker text for better contrast */
+}
+#menu .menu-item:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+@keyframes throw {
+    0% {
+        transform: scale(2);
+        top: 90vmin;
+    }
+    100% {
+        top: 30vmin;
+        transform: scale(1);
+    }
+}
+
+/* New CSS for the turn title */
+#turn-title {
+    font-size: 2em;
+    font-weight: bold;
+    color: var(--accent-color); /* Dark Red for the turn title */
+    position: absolute;
+    left: 10%;
+    top: 50%;
+    transform: translateY(-20%);
+    margin: 0;
+}
+
