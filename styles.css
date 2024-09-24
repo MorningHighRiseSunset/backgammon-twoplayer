@@ -360,8 +360,8 @@ html body #debug {
     font-weight: bold;
     color: var(--accent-color); /* Dark Red for the turn title */
     position: absolute;
-    left: 10%;
-    top: 50%;
+    left: 15%;
+    top: 49%;
     transform: translateY(-20%);
     margin: 0;
 }
