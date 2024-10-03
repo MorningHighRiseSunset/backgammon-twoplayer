@@ -19,8 +19,8 @@ var Board = {
     initialize: function() {
         this.resetBoardState();
         this.populateBoard();
-        this.throwDices();
         this.interactBoard();
+        this.assignTurn(); // Ensure the turn is assigned initially
     },
     
     resetBoardState: function() {
@@ -104,9 +104,6 @@ var Board = {
     },
     
     throwDices: function() {
-        var dices = document.getElementById('dices');
-        dices.classList.add('animate');
-        
         this.isDouble = false;
         this.firstDice = this.rollDice();
         document.getElementById("dice-1").setAttribute("class", "dice dice-" + this.firstDice);
@@ -383,6 +380,10 @@ var game = Object.create(Board);
 
 ready(function() {
     game.initialize();
+    alert("Please click 'Roll Dice' to begin the game."); // Changed to alert
+    document.getElementById("roll-dice").addEventListener("click", function() {
+        game.throwDices(); // Connect roll dice button to throwDices
+    });
     document.getElementById("end-turn").addEventListener("click", function() {
         game.throwDices();
     });
