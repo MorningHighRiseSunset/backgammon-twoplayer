@@ -224,8 +224,9 @@ html body #debug {
     position: absolute;
     height: 10vmin;
     width: 20vmin;
-    top: 90vmin;
-    left: 15vmin;
+    top: 40%; /* Adjusted to place the dice at the top 35% of the screen */
+    left: 30%; /* Center horizontally */
+    transform: translateX(-50%); /* Centering adjustment */
     z-index: 9999999;
 }
 #board #dices.animate {
@@ -364,6 +365,11 @@ html body #debug {
     top: 55%;
     transform: translateY(-20%);
     margin: 0;
+}
+
+#roll-dice {
+    left: 0%;
+    top: 42%;
 }
 
 .grey-button {
