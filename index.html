@@ -1,49 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game</title>
-
-    <link rel="stylesheet" href="styles.css"> <!-- Link to styles.css -->
-    <script src="index.js" defer></script> <!-- Link to index.js -->
-
+    <title>Backgammon Masters</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="index.js" defer></script>
 </head>
-
 <body>
+    <div class="game-container">
+        <header>
+            <h1>Backgammon Masters</h1>
+            <nav>
+                <a href="https://masters-backgammon.netlify.app/" id="computer-vs-player" class="nav-button">Computer VS. Player</a>
+                <button id="restart" class="nav-button">New Game</button>
+            </nav>
+        </header>
 
-    <a href="https://masters-backgammon.netlify.app/" id="computer-vs-player" class="grey-button">Computer VS. Player</a> <!-- Updated link for Computer vs Player mode -->
-
-    <div id="menu">
-
-        <div class="menu-item" id="end-turn">End turn</div>
-        <div class="menu-item" id="restart">Restart game</div>
-    </div>
-
-    <h2>Backgammon: Player Vs. Player mode</h2> <!-- New title element added outside the board -->
-    <div id="turn-title">White's Turn</div> <!-- New title element outside the board -->
-
-    <div id="board">
-
-        <div class="qdr qdr-1"></div>
-
-        <div class="qdr qdr-4"></div>
-        <div id="board-bar"></div>
-
-        <div class="qdr qdr-2"></div>
-
-        <div class="qdr qdr-3"></div>
-
-        <div id="dices">
-
-            <div class="dice" id="dice-1"></div>
-            <div class="dice" id="dice-2"></div>
-
+        <div class="game-info">
+            <div id="turn-title" class="turn-indicator">White's Turn</div>
+            <button id="roll-dice" class="action-button">Roll Dice</button>
+            <button id="end-turn" class="action-button">End Turn</button>
         </div>
 
+        <div id="board">
+            <div class="qdr qdr-1"></div>
+            <div class="qdr qdr-4"></div>
+            <div id="board-bar"></div>
+            <div class="qdr qdr-2"></div>
+            <div class="qdr qdr-3"></div>
+
+            <div id="dices">
+                <div class="dice" id="dice-1"></div>
+                <div class="dice" id="dice-2"></div>
+            </div>
+        </div>
     </div>
-    <button id="roll-dice" class="grey-button">Roll Dice</button> <!-- New button to roll dice -->
 </body>
 </html>
