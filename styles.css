@@ -1,5 +1,6 @@
 :root {
     --black-color: #432818;
+    --board-color: #58331e;
     --white-color: #FFE6A7;
     --bg-color: #FFE6A7;
     --primary-color: #BB9457;
@@ -257,7 +258,7 @@ html body #players .current .color-control {
     justify-content: space-around;
     width: 5vmin;
     height: 60vmin;
-    background-color: var(--black-color);
+    background-color: var(--board-color);
 }
 
 #board-bar .white,
